@@ -20,6 +20,7 @@
         <p>{{ $topic->message }}</p>
     </div>
     <div class="clearfix">
+        @auth
             <form action="{{ route('topics.edit',['id' => $topic->id]) }}" method="GET" class="form">
             @csrf
                 <div class="pull-right"><button class="btn btn-default" type="submit">Modifier</button></div>
@@ -30,7 +31,7 @@
                     @method('DELETE')
                     <div class="pull-right"><button class="btn btn-default" type="submit">Supprimer</button></div>
             </form>
-
+        @endauth
 
     </div>
 </div>

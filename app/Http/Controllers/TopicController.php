@@ -9,6 +9,13 @@ use Illuminate\Http\Request;
 
 class TopicController extends Controller
 {
+
+    public function __construct(){
+        //$this->middleware('auth');
+        //$this->middleware('auth')->only('edit', 'create');
+        //$this->middleware('guest')->only('index','show', 'create','edit','delete');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -106,17 +113,17 @@ class TopicController extends Controller
     public function destroy($id)
     {
         $topic = Topic::find($id);
+        $commentaires = Commentaire::where('topic_id', '=', $id)->get();
         $topic->delete();
+        $commentaires->delete();
         return redirect()->route('home');
     }
 
     public function comment(Request $request, Int $id)
     {
-        //dd($request);
         $commentaire = new Commentaire;
         $commentaire->message = $request->commentaire;
         $commentaire->topic_id = $id;
-        //dd($commentaire);
         $commentaire->save();
 
         /*if($validator->fails()) {

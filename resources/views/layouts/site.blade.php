@@ -50,16 +50,18 @@
                             </div>
                         </div>
                         <div class="col-lg-4 col-xs-12 col-sm-5 col-md-4 avt">
-                            <div class="stnt pull-left">                            
+                            <div class="stnt pull-left">
+                                @auth                         
                                 <form action="{{ route('topics.create') }}" method="get" class="form">
                                     <button class="btn btn-primary">Nouveau Topic</button>
                                 </form>
+                                @endauth
                             </div>
-                            <div class="col-xs-10 text-right menu-1">
-                                <ul>
+                            <div class="col-xs-20 text-right menu-1">
+                                <ul style="display: flex; justify-content: space-between">
                                     @auth
-                                    <li><a href="/">Accueil</a></li>
-                                    <li><a class="dropdown-item" href="{{ route('logout') }}"
+                                    <li style="overflow: hidden"><a href="/">Accueil</a></li>
+                                    <li style="overflow: hidden"><a class="dropdown-item" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
                                                     document.getElementById('logout-form').submit();">
                                         {{ __('Deconnexion') }}
@@ -69,9 +71,9 @@
                                     </form></li>
                                     
                                     @else
-                                    <li><a href="{{ route('home') }}">Accueil</a></li>
-                                    <li><a href="{{ route('login') }}">Connexion</a></li>
-                                    <li><a href="{{ route('register') }}">Créer un compte</a></li>
+                                    <li style="overflow: hidden"><a href="{{ route('home') }}">Accueil</a></li>
+                                    <li style="overflow: hidden"><a href="{{ route('login') }}">Connexion</a></li>
+                                    <li style="overflow: hidden"><a href="{{ route('register') }}">Créer un compte</a></li>
                                     @endauth
                                 </ul>
                             </div>
@@ -206,10 +208,6 @@
                     </div>
                 </div>
 
-
-
-
-
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-8 col-xs-12">
@@ -217,8 +215,6 @@
                         </div>
                     </div>
                 </div>
-
-
             </section>
 
             <footer>
@@ -227,7 +223,6 @@
                         <div class="col-lg-1 col-xs-3 col-sm-2 logo "><a href="#"><img src="{{ asset('/images/logo.jpg')}}" alt=""></a></div>
                         <div class="col-lg-8 col-xs-9 col-sm-5 ">Copyrights 2014, websitename.com</div>
                         <div class="col-lg-3 col-xs-12 col-sm-5 sociconcent">
-                            
                         </div>
                     </div>
                 </div>
