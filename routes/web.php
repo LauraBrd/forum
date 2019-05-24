@@ -15,7 +15,7 @@ Route::get('/', 'TopicController@index')->name('home');
 
 Route::resource('topics','TopicController', ['except'=>['index']]);
 
-Route::get('commentaire', 'TopicController@comment')->name('commentaire');
+Route::get('commentaire/{id}', 'TopicController@comment')->name('commentaire');
 
 Route::get('recherche', 'TopicController@search')->name('recherche');
 

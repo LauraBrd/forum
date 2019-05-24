@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Topic;
+use App\Commentaire;
 use Validator;
 use Illuminate\Http\Request;
 
@@ -62,8 +63,11 @@ class TopicController extends Controller
      */
     public function show($id)
     {
+        //commentaires = Commentaire::find($id);
+        //$commentaires = DB::table('commentaires')->where('topic_id', $id)->get();
+        $commentaires = Commentaire::where('topic_id', '=', $id)->get();
         $topic = Topic::find($id);
-        return view('show', ['topic' => $topic]);
+        return view('show', ['topic' => $topic], ['commentaires' => $commentaires]);
     }
 
     /**
@@ -106,16 +110,19 @@ class TopicController extends Controller
         return redirect()->route('home');
     }
 
-    public function comment(Request $request, $id)
+    public function comment(Request $request, Int $id)
     {
+        //dd($request);
         $commentaire = new Commentaire;
-        $commentaire->message = $request->message;
+        $commentaire->message = $request->commentaire;
+        $commentaire->topic_id = $id;
+        //dd($commentaire);
         $commentaire->save();
 
         /*if($validator->fails()) {
             return back()->withErrors($validator)->withInput();
         }*/
-        return redirect()->route('home');
+        return redirect()->route('topics.show', ['id' => $id]);
     }
 
     public function search(Request $request)
